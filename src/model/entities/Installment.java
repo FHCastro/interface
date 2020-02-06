@@ -5,7 +5,7 @@ import java.util.Date;
 public class Installment {
 	
 	private Date dueDate;
-	private Double amount;
+	private double amount;
 	
 	public Installment(){
 	}
@@ -31,8 +31,4 @@ public class Installment {
 		this.amount = amount;
 	}
 	
-	
-	public double partialValue(double amount) {
-		
-	}
 }

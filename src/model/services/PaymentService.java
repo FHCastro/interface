@@ -1,18 +1,27 @@
 package model.services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import model.entities.Contract;
+import model.entities.Installment;
 
 public class PaymentService {
 	
 	private Contract contract;
+	private Integer numberOfInstallments;
 	
 	private PaymentTax paymentTax;
 	
 	public PaymentService() {
 	}
 
-	public PaymentService(Contract contract) {
+	public PaymentService(Contract contract, Integer numberOfInstallments, PaymentTax paymentTax) {
 		this.contract = contract;
+		this.numberOfInstallments = numberOfInstallments;
+		this.paymentTax = paymentTax;
 	}
 
 	public Contract getContract() {
@@ -23,21 +32,29 @@ public class PaymentService {
 		this.contract = contract;
 	}
 	
-	public Double[] valueInstallments(Contract contrac, PaymentTax paymentTax) {
+	public void valueInstallments() {
 		
-		int numberOfInstallments = contrac.getInstallment().length;
+		List<Installment> installments = new ArrayList<Installment>();
+		
+		
+		Calendar cal = Calendar.getInstance();
 		
 		double partialValue = contract.getTotalValue()/numberOfInstallments;
 		
-		for (int i = 0; i < contrac.length; i++) {
+		for (int i = 0; i < numberOfInstallments; i++) {
+			
+			// dates
+			Date nextMonth = contract.getDate();
+			cal.setTime(nextMonth);
+			cal.add(Calendar.MONTH, i+1);
+			nextMonth = cal.getTime();		
+					
+			installments.add(new Installment(nextMonth, paymentTax.tax(partialValue, i)));
 			
 		}
 		
-		
-		return ;
+		contract.setInstallments(installments);
 		
 	}
-	
-	
 	
 }

@@ -15,11 +15,10 @@ public class Contract {
 	public Contract(){
 	}
 
-	public Contract(Integer number, Date date, Double totalValue, List<Installment> installments) {
+	public Contract(Integer number, Date date, Double totalValue) {
 		this.number = number;
 		this.date = date;
 		this.totalValue = totalValue;
-		this.installments = installments;
 	}
 
 	public Integer getNumber() {
@@ -49,18 +48,11 @@ public class Contract {
 	public List<Installment> getInstallment() {
 		return installments;
 	}
-	
-	public List<Installment> createInstallment(int numberInstallments) {
-		
-		Date nextMonth;
-		
-		for (int i = 0; i < numberInstallments; i++) {
-			
-			//nextMonth = getDate().
-			//this.installments.add(new Installment)
-		}
-		
-		return installments;
+
+	public void setInstallments(List<Installment> installments) {
+		this.installments = installments;
 	}
+	
+
 	
 }
